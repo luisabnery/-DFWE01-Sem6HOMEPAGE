@@ -29,33 +29,35 @@ body {
 }
 
 
-/* =============================================
+/* 
    HEADER
    Fundo escuro com texto claro — identidade visual do Galo.
-============================================= */
+ */
 header {
     background: #080808ce;
     color: rgb(250, 247, 247);
 }
 
 
-/* TOPO PRINCIPAL
-   O layout (d-flex, align-items-center) está no HTML via Bootstrap.
-   Aqui só definimos o padding lateral do bloco.
-*/
-.topo-principal {
-    padding: 10px 40px;
-}
-
-/* LOGO */
+/* LOGO
+   clamp: 60px no mobile, até 100px no desktop */
 .logo-galo {
-    width: 100px;
+    width: clamp(60px, 10vw, 100px);
 }
 
-/* TÍTULO h1 */
+/* TOPO PRINCIPAL
+   Padding lateral menor em telas pequenas via clamp */
+.topo-principal {
+    padding: 10px clamp(12px, 4vw, 40px);
+}
+
+/* TÍTULO h1
+   Em mobile o white-space: nowrap causa corte da tela.
+   Removemos isso e deixamos quebrar normalmente em telas pequenas.
+*/
 .topo-principal h1 {
-    font-size: 32px;
-    white-space: nowrap; /* impede quebra de linha no título */
+    font-size: clamp(18px, 4vw, 32px); /* diminui suavemente conforme a tela encolhe */
+    white-space: normal;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
@@ -76,11 +78,11 @@ header {
 }
 
 
-/* =============================================
+/* 
    NAVEGAÇÃO (substituiu o menu-lateral-e)
    O menu era pensado como lateral, mas foi convertido
    para barra horizontal. O d-flex está no HTML.
-============================================= */
+ */
 .menu-nav {
     background: #111;
     padding: 3px 10px;
@@ -114,11 +116,11 @@ header {
 }
 
 
-/* =============================================
+/* 
    INTRODUÇÃO
    Banner + texto descritivo do clube.
    img-fluid e w-100 já estão no HTML via Bootstrap.
-============================================= */
+ */
 .introducao {
     padding: 20px;
     padding-bottom: 25px;
@@ -132,10 +134,10 @@ header {
 }
 
 
-/* =============================================
+/* 
    TÍTULO DAS SEÇÕES
    Estilo padrão para h2 das seções (Partidas, Notícias, etc.)
-============================================= */
+ */
 .secao-titulo {
     padding: 10px 0;
     margin-bottom: 10px;
@@ -145,10 +147,10 @@ header {
 }
 
 
-/* =============================================
+/* 
    CARDS DE PARTIDAS
    Estilo visual dos cards — layout já tratado pelo Bootstrap (col-md-4)
-============================================= */
+ */
 .card-partida {
     background: white;
     border-radius: 8px;
@@ -175,10 +177,10 @@ header {
 }
 
 
-/* =============================================
+/* 
    NOTÍCIAS
    Imagem grande alinhada à esquerda, sem altura fixa no mobile.
-============================================= */
+ */
 .img-noticia-grande {
     /* Em desktop, iguala a altura com o bloco de notícias menores */
     height: 100%;
@@ -186,10 +188,10 @@ header {
 }
 
 
-/* =============================================
+/* 
    VÍDEOS
    Links clicáveis com hover sutil
-============================================= */
+ */
 .video-link {
     display: block;
     text-decoration: none;
@@ -213,30 +215,43 @@ header {
 }
 
 
-/* =============================================
+/* 
    ASIDE — LATERAL DIREITA
    col-12 col-md-4 está no HTML via Bootstrap.
    Em mobile: aparece abaixo do main (empilhado).
    Em desktop: fica ao lado.
-============================================= */
+ */
 .lateral-direita {
     background: rgba(185, 132, 26, 0.952); /* dourado */
     padding: 10px;
 }
 
-/* CAIXA DE TAGS (links com imagens) */
+/* CAIXA DE TAGS (links com imagens)
+   Layout 2x2 feito pelo Bootstrap (col-6) no HTML.
+   Borda suave apenas para delimitar a área.
+*/
 .tags {
-    padding: 20px 0;
-    border-radius: 3px;
-    border: dashed rgb(255, 249, 196) 2px;
+    padding: 12px;
+    border-radius: 6px;
+    border: 1px solid rgba(255, 249, 196, 0.4);
+    background: rgba(0, 0, 0, 0.1);
     margin-top: 5px;
 }
 
-/* Imagens dentro das tags centralizadas e com margem */
-.tags img {
+/* Imagens das tags: compactas, centralizadas, com hover suave */
+.img-tag {
+    width: 100%;
+    max-width: 110px;
+    height: auto;
     display: block;
-    margin: 15px auto;
-    width: 80%;
+    margin: 4px auto;
+    border-radius: 4px;
+    transition: opacity 0.2s, transform 0.2s;
+}
+
+.img-tag:hover {
+    opacity: 0.85;
+    transform: scale(1.04);
 }
 
 
@@ -244,7 +259,8 @@ header {
 .newsletter-box {
     padding: 15px;
     border-radius: 5px;
-    border: white solid 3px;
+    /* Borda mais suave: 1px sólido em vez de 3px */
+    border: 1px solid rgba(255, 255, 255, 0.6);
     margin-top: 10px;
 }
 
@@ -261,33 +277,41 @@ header {
     margin-bottom: 12px;
 }
 
-/* Inputs do formulário: form-control do Bootstrap já estiliza,
-   aqui só ajustamos a margem inferior */
 .newsletter-box .form-control {
     margin-bottom: 8px;
 }
 
 
-/* =============================================
+/* 
    PATROCINADORES
-   Fundo cinza, layout em grid via Bootstrap (col-6 col-md-2)
-============================================= */
+   col-4 col-md-2 no HTML: 3 por linha no mobile, 6 no desktop.
+   Sem borda nos logos — apenas sombra suave para destacar.
+ */
 .patrocinadores {
     background: #e2e1e1;
     margin-top: 20px;
 }
 
-.patrocinadores img {
+/* Estilo dos logos de patrocinadores:
+   sombra leve no lugar da borda, para visual mais limpo */
+.img-patrocinador {
     max-width: 100%;
     height: auto;
+    border-radius: 4px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12);
+    transition: box-shadow 0.2s;
+}
+
+.img-patrocinador:hover {
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.22);
 }
 
 
-/* =============================================
+/* 
    FOOTER
    Fundo preto com texto branco centralizado.
    text-center e py-3 estão no HTML via Bootstrap.
-============================================= */
+ */
 .rodape {
     background: #000;
     color: white;
@@ -308,4 +332,266 @@ header {
 
 .link-footer:hover {
     text-decoration: underline;
+}
+
+
+/* 
+   ANIMAÇÕES E INTERATIVIDADE — 100% CSS, zero JavaScript
+   Técnicas usadas:
+   - @keyframes: define sequências de animação
+   - animation: aplica a animação em um elemento
+   - transition: suaviza mudanças de propriedade no hover/focus
+   - :hover e :focus: estados de interação sem JS
+   - transform: move, escala ou gira elementos visualmente
+
+
+/* 
+   1. ENTRADA DA PÁGINA — fade + subida suave
+   O corpo inteiro aparece gradualmente ao carregar.
+   animation-fill-mode: both mantém o estado final após acabar.
+ */
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(18px); /* começa 18px abaixo */
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+body {
+    animation: fadeUp 0.6s ease both;
+}
+
+
+/* 
+   2. LOGO — rotação leve no hover
+   Dá personalidade ao logo sem chamar nenhuma função JS.
+ */
+.logo-galo {
+    transition: transform 0.4s ease;
+}
+
+.logo-galo:hover {
+    transform: rotate(-8deg) scale(1.08);
+}
+
+
+/* 
+   3. LINKS DO MENU — sublinhado animado cresce da esquerda
+   O ::after cria uma linha invisível que se expande no hover.
+   position: relative no <a> é necessário para o posicionamento.
+ */
+.menu-nav a {
+    position: relative; /* necessário para o ::after se posicionar */
+}
+
+.menu-nav a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 0;           /* começa com largura zero (invisível) */
+    height: 2px;
+    background: goldenrod;
+    transition: width 0.3s ease; /* cresce suavemente no hover */
+}
+
+.menu-nav a:hover::after {
+    width: 100%; /* expande para cobrir o texto */
+}
+
+
+/* 
+   4. CAMPO DE BUSCA — ilumina ao receber foco
+   :focus é ativado quando o usuário clica no campo — sem JS.
+ */
+.campo-busca {
+    transition: box-shadow 0.3s ease, background-color 0.3s ease;
+    outline: none;
+}
+
+.campo-busca:focus {
+    background-color: #444;
+    box-shadow: 0 0 0 3px rgba(238, 189, 56, 0.5); /* brilho dourado */
+}
+
+
+/* 
+   5. CARDS DE PARTIDAS — levitam no hover
+   box-shadow maior + translateY negativo = efeito de elevação.
+ */
+.card-partida {
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.card-partida:hover {
+    transform: translateY(-6px);           /* sobe 6px */
+    box-shadow: 0 10px 24px rgba(0,0,0,0.18);
+}
+
+/* Imagem do card cresce levemente junto */
+.card-partida img {
+    transition: transform 0.35s ease;
+    overflow: hidden;
+}
+
+.card-partida:hover img {
+    transform: scale(1.04);
+}
+
+
+/* 
+   6. IMAGENS DE NOTÍCIAS — escurece + zoom suave no hover
+   O overflow: hidden no article impede que a imagem "vaze".
+ */
+.noticias article {
+    overflow: hidden;
+    border-radius: 5px;
+}
+
+.noticias img {
+    transition: transform 0.4s ease, filter 0.4s ease;
+    display: block;
+}
+
+.noticias article:hover img {
+    transform: scale(1.06);
+    filter: brightness(0.88);
+}
+
+
+/* 
+   7. VÍDEOS — borda dourada aparece + título muda de cor
+   O ::before cria uma linha inferior colorida com transition.
+ */
+.video-link {
+    transition: color 0.2s;
+}
+
+.video-link img {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.video-link:hover img {
+    transform: scale(1.03);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.2);
+    opacity: 1; /* sobrescreve o opacity anterior para não conflitar */
+}
+
+.video-link:hover h4 {
+    color: goldenrod; /* título muda de cor no hover */
+}
+
+
+/* 
+   8. BOTÃO NEWSLETTER — efeito fill: fundo cresce de baixo
+   Técnica: o ::before cobre o botão por baixo via scaleY(0→1).
+   overflow: hidden impede que o ::before vaze para fora.
+ */
+.btn-newsletter {
+    position: relative;
+    overflow: hidden;
+    background: #000;
+    color: white;
+    border: none;
+    padding: 8px;
+    width: 100%;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+    font-size: 0.95rem;
+    letter-spacing: 0.5px;
+}
+
+/* Camada que sobe por baixo no hover */
+.btn-newsletter::before {
+    content: "";
+    position: absolute;
+    inset: 0;                       /* cobre todo o botão */
+    background: goldenrod;
+    transform: scaleY(0);           /* começa invisível (achatado) */
+    transform-origin: bottom;       /* cresce de baixo para cima */
+    transition: transform 0.3s ease;
+    z-index: 0;
+}
+
+.btn-newsletter:hover::before {
+    transform: scaleY(1);           /* expande para cobrir o botão */
+}
+
+/* O texto fica na frente da camada dourada */
+.btn-newsletter span {
+    position: relative;
+    z-index: 1;
+}
+
+.btn-newsletter:hover {
+    color: #000; /* texto fica preto sobre o fundo dourado */
+}
+
+/* Inputs da newsletter: borda ilumina no foco */
+.newsletter-box input {
+    transition: border-color 0.25s ease, box-shadow 0.25s ease;
+    outline: none;
+}
+
+.newsletter-box input:focus {
+    border-color: goldenrod;
+    box-shadow: 0 0 0 2px rgba(238, 189, 56, 0.35);
+}
+
+
+/* 
+   9. TAGS DO ASIDE — pulso suave na entrada
+   stagger: cada imagem aparece com um pequeno atraso diferente,
+   criando efeito cascata sem nenhum JS.
+ */
+@keyframes popIn {
+    from {
+        opacity: 0;
+        transform: scale(0.85);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Cada item das tags entra com atraso escalonado (stagger) */
+.tags .col-6:nth-child(1) .img-tag { animation: popIn 0.4s ease 0.1s both; }
+.tags .col-6:nth-child(2) .img-tag { animation: popIn 0.4s ease 0.2s both; }
+.tags .col-6:nth-child(3) .img-tag { animation: popIn 0.4s ease 0.3s both; }
+.tags .col-6:nth-child(4) .img-tag { animation: popIn 0.4s ease 0.4s both; }
+.tags .col-12 .img-tag             { animation: popIn 0.4s ease 0.5s both; }
+
+
+/* 
+   10. PATROCINADORES — brilho sutil no hover
+   filter: brightness deixa a imagem mais clara ao passar o mouse.
+ */
+.img-patrocinador {
+    transition: transform 0.25s ease, box-shadow 0.25s ease, filter 0.25s ease;
+}
+
+.img-patrocinador:hover {
+    transform: scale(1.06);
+    box-shadow: 0 4px 14px rgba(0,0,0,0.2);
+    filter: brightness(1.08);
+}
+
+
+/* 
+   11. FOOTER — link Instagram com efeito de brilho dourado
+ */
+.link-footer {
+    transition: color 0.2s ease, letter-spacing 0.2s ease;
+}
+
+.link-footer:hover {
+    color: #f5c842;
+    letter-spacing: 0.5px; /* espaçamento cresce levemente */
+    text-decoration: none;
 }

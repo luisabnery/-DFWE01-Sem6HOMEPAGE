@@ -1,0 +1,311 @@
+/* =============================================================
+   styles.css — Clube Atlético Mineiro
+   IMPORTANTE: Este arquivo contém APENAS estilos visuais (cores,
+   fontes, bordas, espaçamentos de tema).
+   Toda a lógica de layout e responsividade é feita pelo Bootstrap
+   (col-12, col-md-8, d-flex, etc.) diretamente no HTML.
+   NÃO há media queries aqui — o Bootstrap cuida disso.
+============================================================= */
+
+
+/* RESET BÁSICO
+   Zera margens e paddings padrão do navegador.
+   box-sizing: border-box faz o padding ser incluído na largura total,
+   evitando que elementos "estourem" o layout.
+*/
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* BODY
+   Fonte base e cor de fundo da página.
+*/
+body {
+    font-family: Arial, sans-serif;
+    background: #f5f1f1;
+}
+
+
+/* =============================================
+   HEADER
+   Fundo escuro com texto claro — identidade visual do Galo.
+============================================= */
+header {
+    background: #080808ce;
+    color: rgb(250, 247, 247);
+}
+
+
+/* TOPO PRINCIPAL
+   O layout (d-flex, align-items-center) está no HTML via Bootstrap.
+   Aqui só definimos o padding lateral do bloco.
+*/
+.topo-principal {
+    padding: 10px 40px;
+}
+
+/* LOGO */
+.logo-galo {
+    width: 100px;
+}
+
+/* TÍTULO h1 */
+.topo-principal h1 {
+    font-size: 32px;
+    white-space: nowrap; /* impede quebra de linha no título */
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+/* CAMPO DE BUSCA */
+.campo-busca {
+    padding: 6px;
+    width: 100%;
+    max-width: 350px;
+    margin-top: 10px;
+    background-color: #616161;
+    border-radius: 20px;
+    border: none;
+    color: white;
+}
+
+.campo-busca::placeholder {
+    color: #ccc;
+}
+
+
+/* =============================================
+   NAVEGAÇÃO (substituiu o menu-lateral-e)
+   O menu era pensado como lateral, mas foi convertido
+   para barra horizontal. O d-flex está no HTML.
+============================================= */
+.menu-nav {
+    background: #111;
+    padding: 3px 10px;
+}
+
+.menu-nav ul {
+    /* list-unstyled e d-flex estão no HTML via Bootstrap */
+    gap: 0; /* espaçamento controlado pelo gap-2 no HTML */
+}
+
+.menu-nav li {
+    padding: 5px 10px;
+    /* Separador visual entre itens com ::after */
+}
+
+/* Pipe ( | ) entre os itens, exceto o último */
+.menu-nav li:not(:last-child)::after {
+    content: "|";
+    margin-left: 20px;
+    color: #999;
+}
+
+.menu-nav a {
+    text-decoration: none;
+    color: white;
+    font-size: small;
+}
+
+.menu-nav a:hover {
+    color: rgb(238, 189, 56); /* dourado — cor temática do Galo */
+}
+
+
+/* =============================================
+   INTRODUÇÃO
+   Banner + texto descritivo do clube.
+   img-fluid e w-100 já estão no HTML via Bootstrap.
+============================================= */
+.introducao {
+    padding: 20px;
+    padding-bottom: 25px;
+}
+
+.texto-intro {
+    padding: 10px;
+    color: #555;
+    text-align: justify;
+    line-height: 1.6;
+}
+
+
+/* =============================================
+   TÍTULO DAS SEÇÕES
+   Estilo padrão para h2 das seções (Partidas, Notícias, etc.)
+============================================= */
+.secao-titulo {
+    padding: 10px 0;
+    margin-bottom: 10px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: goldenrod;
+    border-bottom: 2px solid goldenrod;
+}
+
+
+/* =============================================
+   CARDS DE PARTIDAS
+   Estilo visual dos cards — layout já tratado pelo Bootstrap (col-md-4)
+============================================= */
+.card-partida {
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    padding-bottom: 10px;
+}
+
+.card-partida img {
+    width: 100%;
+    height: auto;
+}
+
+.card-partida h3 {
+    font-size: 0.95rem;
+    padding: 10px 10px 4px;
+    color: #222;
+}
+
+.card-partida p {
+    font-size: 0.85rem;
+    padding: 0 10px;
+    color: #777;
+}
+
+
+/* =============================================
+   NOTÍCIAS
+   Imagem grande alinhada à esquerda, sem altura fixa no mobile.
+============================================= */
+.img-noticia-grande {
+    /* Em desktop, iguala a altura com o bloco de notícias menores */
+    height: 100%;
+    object-fit: cover;
+}
+
+
+/* =============================================
+   VÍDEOS
+   Links clicáveis com hover sutil
+============================================= */
+.video-link {
+    display: block;
+    text-decoration: none;
+    color: #222;
+}
+
+.video-link img {
+    width: 100%;
+    border-radius: 6px;
+    transition: opacity 0.2s;
+}
+
+.video-link:hover img {
+    opacity: 0.85;
+}
+
+.video-link h4 {
+    font-size: 0.9rem;
+    padding: 6px 2px;
+    color: #333;
+}
+
+
+/* =============================================
+   ASIDE — LATERAL DIREITA
+   col-12 col-md-4 está no HTML via Bootstrap.
+   Em mobile: aparece abaixo do main (empilhado).
+   Em desktop: fica ao lado.
+============================================= */
+.lateral-direita {
+    background: rgba(185, 132, 26, 0.952); /* dourado */
+    padding: 10px;
+}
+
+/* CAIXA DE TAGS (links com imagens) */
+.tags {
+    padding: 20px 0;
+    border-radius: 3px;
+    border: dashed rgb(255, 249, 196) 2px;
+    margin-top: 5px;
+}
+
+/* Imagens dentro das tags centralizadas e com margem */
+.tags img {
+    display: block;
+    margin: 15px auto;
+    width: 80%;
+}
+
+
+/* NEWSLETTER */
+.newsletter-box {
+    padding: 15px;
+    border-radius: 5px;
+    border: white solid 3px;
+    margin-top: 10px;
+}
+
+.newsletter-box h3 {
+    text-align: center;
+    color: #ffffff;
+    margin-bottom: 8px;
+}
+
+.newsletter-box p {
+    text-align: justify;
+    color: whitesmoke;
+    font-size: 0.9rem;
+    margin-bottom: 12px;
+}
+
+/* Inputs do formulário: form-control do Bootstrap já estiliza,
+   aqui só ajustamos a margem inferior */
+.newsletter-box .form-control {
+    margin-bottom: 8px;
+}
+
+
+/* =============================================
+   PATROCINADORES
+   Fundo cinza, layout em grid via Bootstrap (col-6 col-md-2)
+============================================= */
+.patrocinadores {
+    background: #e2e1e1;
+    margin-top: 20px;
+}
+
+.patrocinadores img {
+    max-width: 100%;
+    height: auto;
+}
+
+
+/* =============================================
+   FOOTER
+   Fundo preto com texto branco centralizado.
+   text-center e py-3 estão no HTML via Bootstrap.
+============================================= */
+.rodape {
+    background: #000;
+    color: white;
+    padding: 15px;
+    text-align: center;
+}
+
+.rodape p {
+    margin-bottom: 4px;
+    font-size: 0.9rem;
+}
+
+.link-footer {
+    color: goldenrod;
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+.link-footer:hover {
+    text-decoration: underline;
+}
